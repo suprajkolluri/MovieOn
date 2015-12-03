@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry excluding="**" kind="src" output="target/test-classes" path="src/test/resources">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" output="target/classes" path="src/main/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-core/4.2.1.RELEASE/spring-core-4.2.1.RELEASE.jar" sourcepath="M2_REPO/org/springframework/spring-core/4.2.1.RELEASE/spring-core-4.2.1.RELEASE-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/commons-logging/commons-logging/1.2/commons-logging-1.2.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-web/4.2.1.RELEASE/spring-web-4.2.1.RELEASE.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-aop/4.2.1.RELEASE/spring-aop-4.2.1.RELEASE.jar"/>
+	<classpathentry kind="var" path="M2_REPO/aopalliance/aopalliance/1.0/aopalliance-1.0.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-beans/4.2.1.RELEASE/spring-beans-4.2.1.RELEASE.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-context/4.2.1.RELEASE/spring-context-4.2.1.RELEASE.jar" sourcepath="M2_REPO/org/springframework/spring-context/4.2.1.RELEASE/spring-context-4.2.1.RELEASE-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-expression/4.2.1.RELEASE/spring-expression-4.2.1.RELEASE.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-webmvc/4.2.1.RELEASE/spring-webmvc-4.2.1.RELEASE.jar" sourcepath="M2_REPO/org/springframework/spring-webmvc/4.2.1.RELEASE/spring-webmvc-4.2.1.RELEASE-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/security/spring-security-web/4.0.2.RELEASE/spring-security-web-4.0.2.RELEASE.jar" sourcepath="M2_REPO/org/springframework/security/spring-security-web/4.0.2.RELEASE/spring-security-web-4.0.2.RELEASE-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/security/spring-security-core/4.0.2.RELEASE/spring-security-core-4.0.2.RELEASE.jar" sourcepath="M2_REPO/org/springframework/security/spring-security-core/4.0.2.RELEASE/spring-security-core-4.0.2.RELEASE-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/security/spring-security-config/4.0.2.RELEASE/spring-security-config-4.0.2.RELEASE.jar" sourcepath="M2_REPO/org/springframework/security/spring-security-config/4.0.2.RELEASE/spring-security-config-4.0.2.RELEASE-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/security/spring-security-taglibs/4.0.2.RELEASE/spring-security-taglibs-4.0.2.RELEASE.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/security/spring-security-acl/4.0.2.RELEASE/spring-security-acl-4.0.2.RELEASE.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-jdbc/4.1.6.RELEASE/spring-jdbc-4.1.6.RELEASE.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-tx/4.1.7.RELEASE/spring-tx-4.1.7.RELEASE.jar"/>
+	<classpathentry kind="var" path="M2_REPO/jstl/jstl/1.2/jstl-1.2.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/data/spring-data-mongodb/1.8.0.RELEASE/spring-data-mongodb-1.8.0.RELEASE.jar" sourcepath="M2_REPO/org/springframework/data/spring-data-mongodb/1.8.0.RELEASE/spring-data-mongodb-1.8.0.RELEASE-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/data/spring-data-commons/1.11.0.RELEASE/spring-data-commons-1.11.0.RELEASE.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-api/1.7.12/slf4j-api-1.7.12.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/slf4j/jcl-over-slf4j/1.7.12/jcl-over-slf4j-1.7.12.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/mongodb/mongo-java-driver/2.13.0/mongo-java-driver-2.13.0.jar"/>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v7.0">
+		<attributes>
+			<attribute name="owner.project.facets" value="jst.web"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>
