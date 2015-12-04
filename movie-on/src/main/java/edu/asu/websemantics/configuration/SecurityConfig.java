@@ -24,8 +24,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.authorizeRequests().antMatchers("/welcome/**").access("hasAnyRole('ROLE_ADMIN','ROLE_USER')").and()
-				.formLogin().loginPage("/login").failureUrl("/login?error").defaultSuccessUrl("/welcome")
+		http.authorizeRequests().antMatchers("/profile/**").access("hasAnyRole('ROLE_ADMIN','ROLE_USER')").and()
+				.formLogin().loginPage("/login").failureUrl("/login?error").defaultSuccessUrl("/profile")
 				.usernameParameter("username").passwordParameter("password").and().logout()
 				.logoutSuccessUrl("/login?logout").and().exceptionHandling().accessDeniedPage("/403").and().csrf();
 	}

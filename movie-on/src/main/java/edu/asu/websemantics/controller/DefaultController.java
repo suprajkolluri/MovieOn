@@ -13,7 +13,7 @@ public class DefaultController {
 
 		ModelAndView model = new ModelAndView();
 		model.addObject("title", "Distributed Software Development");
-		model.addObject("message", "This is default page!");
+		model.addObject("message", "This is default page!");			
 		model.setViewName("welcome");
 		return model;
 
