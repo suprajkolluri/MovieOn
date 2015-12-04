@@ -23,6 +23,7 @@
 		<spring.data.mongo.version>1.8.0.RELEASE</spring.data.mongo.version>
 		<apache.jena.version>3.0.0</apache.jena.version>
 		<youtube.api.version>v3-rev154-1.21.0</youtube.api.version>
+		<jackson.version>2.7.0-rc1</jackson.version>
 	</properties>
 	<build>
 		<finalName>movieon</finalName>
@@ -112,6 +113,10 @@
 			<artifactId>google-api-services-youtube</artifactId>
 			<version>${youtube.api.version}</version>
 		</dependency>
-
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
 	</dependencies>
 </project>
