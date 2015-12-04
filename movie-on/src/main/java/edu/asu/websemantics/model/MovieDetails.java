@@ -23,4 +23,9 @@ public class MovieDetails {
 		this.videoresult = videoresult;
 	}
 
+	@Override
+	public String toString() {
+		return "MovieDetails [moviename=" + moviename + ", videoresult=" + videoresult + "]";
+	}
+
 }

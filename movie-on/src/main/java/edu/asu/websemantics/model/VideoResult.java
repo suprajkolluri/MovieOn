@@ -20,4 +20,9 @@ public class VideoResult {
 		this.title = title;
 	}
 
+	@Override
+	public String toString() {
+		return "VideoResult [videoId=" + videoId + ", title=" + title + "]";
+	}
+
 }

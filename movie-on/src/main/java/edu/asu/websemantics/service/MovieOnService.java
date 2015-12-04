@@ -15,15 +15,17 @@ public class MovieOnService {
 	private FavouriteGenre favouriteGenre;
 
 	@Autowired
-	private IMDBService imdbService = new IMDBService();
+	private IMDBService imdbService;
 
-	public void moviesAndVideos(String userId) throws IOException {
+	public List<MovieDetails> moviesAndVideos(String userId) throws IOException {
 
 		List<String> genres = favouriteGenre.calculateFavoriteGenre(userId);
 
 		genres.add("Action");
 		List<MovieDetails> li = imdbService.getMovieDetails(genres);
 		System.out.println(li.size());
+		System.out.println(li);
+		return li;
 
 	}
 

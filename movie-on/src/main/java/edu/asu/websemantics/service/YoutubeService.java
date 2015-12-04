@@ -49,7 +49,7 @@ public class YoutubeService {
 		// To increase efficiency, only retrieve the fields that the
 		// application uses.
 		search.setFields("items(id/kind,id/videoId,snippet/title,snippet/thumbnails/default/url)");
-		search.setMaxResults(new Long(5));
+		search.setMaxResults(new Long(3));
 
 		// Call the API and print results.
 		SearchListResponse searchResponse = search.execute();
@@ -63,7 +63,7 @@ public class YoutubeService {
 	}
 
 	private List<VideoResult> getDetail(Iterator<SearchResult> iterator, String queryTerm) {
-		// TODO Auto-generated method stub
+
 		List<VideoResult> lt = new ArrayList<VideoResult>();
 		while (iterator.hasNext()) {
 
