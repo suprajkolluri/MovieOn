@@ -83,7 +83,7 @@
 		
 		<!-- Registration Form -->
 		<form name='registerForm'
-			action="register"  id="register">
+			action="trends"  id="register">
 
 			<table>
 			<tr><td colspan='2'><input name="submit" type="submit"
