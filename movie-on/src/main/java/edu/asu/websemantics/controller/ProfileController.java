@@ -21,12 +21,15 @@ public class ProfileController {
 
 	private static List<MovieDetails> movieDetails = null;
 
+	private static String userName = null;
+
 	@RequestMapping(value = "/profile**", method = RequestMethod.GET)
 	public ModelAndView defaultPage() throws IOException {
 
 		ModelAndView model = new ModelAndView();
 		String user = UserInfo.getUserName();
-		if (movieDetails == null) {
+		if (userName == null || !user.equals(userName)) {
+			userName = user;
 			movieDetails = movieOnService.moviesAndVideos(user);
 		}
 		model.addObject("movieDetails", movieDetails);
