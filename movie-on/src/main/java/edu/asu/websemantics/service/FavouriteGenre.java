@@ -3,9 +3,11 @@ package edu.asu.websemantics.service;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Scanner;
 
 import org.apache.jena.query.Query;
 import org.apache.jena.query.QueryExecution;
@@ -26,21 +28,23 @@ public class FavouriteGenre {
 	Model userPreferences = null;
 
 	public List<String> calculateFavoriteGenre(String userId) throws IOException {
-
 		System.out.println(userId);
 
 		// create model
 		createUserModel();
 
 		// print preferences and genre
-		fetchPreferences(userPreferences, userId);
-
-		return new ArrayList<String>();
+		return fetchPreferences(userPreferences, userId);
 	}
 
-	private void fetchPreferences(Model model, String userId) {
+	private List<String> fetchPreferences(Model model, String userId) {
 
 		StringBuffer queryStr = new StringBuffer();
+		double curRating = 0.0;
+		List<Double> countRatingList;		
+		double avgRating;		
+		double freq = 0;
+		List<String> favouriteGenres = new ArrayList<String>();
 
 		// Establish Prefixes
 		// Set default Name space first
@@ -49,96 +53,88 @@ public class FavouriteGenre {
 		queryStr.append("PREFIX rdf" + ": <" + "http://www.w3.org/1999/02/22-rdf-syntax-ns#" + "> ");
 
 		// Now add query
-
 		String queryRequest = "select ?genre ?rating ?user where{?person e:userID ?user. ?person e:preferences ?genre . ?person e:rating ?rating.  FILTER (?user = '"
 				+ userId + "').}";
 		queryStr.append(queryRequest);
-		// System.out.println(queryRequest);
-
 		Query query = QueryFactory.create(queryStr.toString());
 		QueryExecution qexec = QueryExecutionFactory.create(query, model);
 
 		try {
 			ResultSet response = qexec.execSelect();
-			Hashtable<String, List<Double>> ht = new Hashtable<String, List<Double>>();
+			HashMap<String, List<Double>> ht = new HashMap<String, List<Double>>();
 			int numberOfRatedMovies = 0;
 			while (response.hasNext()) {
+
 				QuerySolution soln = response.nextSolution();
 				RDFNode genre = soln.get("?genre");
 				RDFNode rating = soln.get("?rating");
-				RDFNode user = soln.get("?user");
-				if (genre != null && rating != null && user != null) {
-					// System.out.println("genres= " + genre.toString() + " and
-					// rating= " + rating.toString()
-					// + " and user=" + user.toString());
+				/* RDFNode user = soln.get("?user"); */
+				if (genre != null && rating != null) {
+
 					String genres[] = genre.toString().split("\\|");
-					double curRating = Double.parseDouble(rating.toString());
+					curRating = Double.parseDouble(rating.toString());
+
 					for (int i = 0; i < genres.length; i++) {
-						// System.out.println("genre= " + genres[i] + " and
-						// rating= " + rating);
+
 						numberOfRatedMovies++;
 						if (ht.containsKey(genres[i])) {
-							List<Double> countRatingList = ht.get(genres[i]);
+
+							countRatingList = ht.get(genres[i]);
 							double overallRating = countRatingList.get(0) + curRating;
-							double overallCount = countRatingList.get(1) + 1;
+							double overallCount = countRatingList.get(1) + 1;							
 							ht.put(genres[i], new ArrayList<Double>() {
 
 								{
 									add(overallRating);
 									add(overallCount);
+									add(0.0);
 								}
 							});
 						} else {
-							List<Double> countRatingList = new ArrayList<Double>();
+
+							countRatingList = new ArrayList<Double>();
 							countRatingList.add(curRating);
 							countRatingList.add(1.0);
+							countRatingList.add(0.0);
 							ht.put(genres[i], countRatingList);
 						}
 					}
-
-				}
-
-				else
+				} else
 					System.out.println("No Friends found!");
-
 			}
-			double sum = 0;
-			double count = 0;
-			double avgRating;
-			double maxImpactValue = 0;
-			double totalRating = 0;
-			double numberOfMovies = 0;
-			String favGenre = null;
-			double freq = 0;
-
+			//calculating impact function
+			HashMap<String, Double> hp = new HashMap<String, Double>();
 			for (Entry<String, List<Double>> e : ht.entrySet()) {
 
-				System.out.println("Key" + e.getKey() + " Value" + e.getValue());
-				totalRating = e.getValue().get(0);
-				numberOfMovies = e.getValue().get(1);
-				sum = sum + totalRating;
-				count = count + numberOfMovies;
-				avgRating = totalRating / numberOfMovies;
-				freq = numberOfMovies / (20 * numberOfRatedMovies);
-				if (freq + avgRating > maxImpactValue) {
-					maxImpactValue = freq + avgRating;
-					favGenre = e.getKey();
-				}
-				// calculating impact function
-
+				double totalRating = e.getValue().get(0);
+				double numberOfGenreMovies = e.getValue().get(1);				
+				avgRating = totalRating / numberOfGenreMovies;
+				freq = (numberOfGenreMovies * 5)/ numberOfRatedMovies;
+				System.out.println("numberOfRatedMovies="+numberOfRatedMovies);
+				double impactPoints = avgRating + freq;
+				System.out.println("genre= "+ e.getKey()+"and impactPoints= "+ impactPoints);
+				hp.put(e.getKey(), impactPoints);
+				System.out.println("Key= " + e.getKey() + "Value= " + e.getValue());
 			}
-			System.out.println("sum= " + sum);
-			System.out.println("number of movies= " + numberOfRatedMovies);
-			System.out.println("count= " + count);
-			System.out.println("max impact function value= " + maxImpactValue);
-			System.out.println("favorite genre= " + favGenre);
+			System.out.println("here");
+			Map<String,Double> result = MapUtil.sortByValue(hp);
+			
+			for (Entry<String, Double> e : result.entrySet()) {
+
+				favouriteGenres.add(e.getKey());
+				System.out.println(e.getKey());
+			}
+			
 
 		} finally {
 			System.out.println("done!!");
 			qexec.close();
 		}
+		
+		return favouriteGenres;
 
 	}
+		
 
 	public void createUserModel() throws IOException {
 
@@ -148,17 +144,20 @@ public class FavouriteGenre {
 		rdfInstance.close();
 	}
 
-	/*
-	 * public static void main(String args[]) throws IOException {
-	 * 
-	 * FavouriteGenre object = new FavouriteGenre(); System.out.println(
-	 * "Select a user from 1 to 367:"); Scanner input = new Scanner(System.in);
-	 * String userId = input.nextLine();
-	 * 
-	 * // Calculating user favourite genre String genre =
-	 * object.calculateFavoriteGenre(userId);
-	 * 
-	 * }
-	 */
+	/* main function*/
+	  
+	  public static void main(String args[]) throws IOException {
+	  
+	  FavouriteGenre object = new FavouriteGenre();
+	  System.out.println("Select a user from 1 to 367:"); 
+	  Scanner input = new Scanner(System.in);
+	  String userId = input.nextLine();
+	  
+	  // Calculating user favourite genre String genre =
+	  object.calculateFavoriteGenre(userId);
+	  
+	  
+	  }
+	 
 
 }

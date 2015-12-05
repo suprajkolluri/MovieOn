@@ -21,7 +21,7 @@
 
 		<c:if test="${pageContext.request.userPrincipal.name != null}">
 			<h2>
-				User : ${pageContext.request.userPrincipal.name} | <a
+				Hello User : ${pageContext.request.userPrincipal.name} | <a
 					href="javascript:formSubmit()"> Logout</a>
 			</h2>
 		</c:if>
@@ -31,19 +31,17 @@
 	<c:forEach var="movie" items="${movieDetails}">
 
 		<div class="row">
-			<table>
-				<tr>
-					<td><h4>Movie Name: ${movie.moviename}</h4></td>
-				</tr>
-				<tr>
-					<c:forEach var="video" items="${movie.videoresult}">
-						<td><iframe title="YouTube video player"
-								class="youtube-player" type="text/html"
-								src="http://www.youtube.com/embed/${video.videoId}"
-								frameborder="0" allowFullScreen></iframe></td>
-					</c:forEach>
-				</tr>
-			</table>
+			<tr>
+				<td><h4>Movie Name: ${movie.moviename}</h4></td>
+			</tr>
+			<tr>
+				<c:forEach var="video" items="${movie.videoresult}">
+					<td><iframe title="YouTube video player"
+							class="youtube-player" type="text/html"
+							src="http://www.youtube.com/embed/${video.videoId}"
+							frameborder="0" allowFullScreen></iframe></td>
+				</c:forEach>
+			</tr>
 
 		</div>
 	</c:forEach>
